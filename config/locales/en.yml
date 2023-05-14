@@ -6,4 +6,5 @@ en:
           attributes:
             date_range:
               invalid_date_range: "must be a valid date range with a beginning date smaller than its end date"
+              invalid_type: "is not a valid range (%{value_class})."
               overlaps_with_other: "overlaps with other date ranges"
