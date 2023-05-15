@@ -76,4 +76,55 @@ RSpec.describe Play, type: :model do
       end
     end
   end
+
+  describe "#start_date" do
+    context "when date range is present" do
+      let(:start_date) { Date.today }
+      let(:end_date) { Date.today + 3.days }
+      let(:play) { FactoryBot.build(:play, date_range: start_date..end_date) }
+
+      it "returns the first date in the date range" do
+        expect(play.start_date).to eq(start_date)
+      end
+    end
+
+    context "when date range is not present" do
+      let(:play) { Play.new }
+
+      it "returns nil" do
+        expect(play.start_date).to be_nil
+      end
+    end
+  end
+
+  describe "#end_date" do
+    context "when date range is present" do
+      let(:start_date) { Date.today }
+      let(:end_date) { Date.today + 3.days }
+
+      context "when the date range excludes the end date" do
+        let(:play) { FactoryBot.build(:play, date_range: start_date...end_date) }
+
+        it "returns the last date in the date range minus one day" do
+          expect(play.end_date).to eq(end_date - 1.day)
+        end
+      end
+
+      context "when the date range includes the end date" do
+        let(:play) { FactoryBot.build(:play, date_range: start_date..end_date) }
+
+        it "returns the last date in the date range" do
+          expect(play.end_date).to eq(end_date)
+        end
+      end
+    end
+
+    context "when date range is not present" do
+      let(:play) { Play.new }
+
+      it "returns nil" do
+        expect(play.end_date).to be_nil
+      end
+    end
+  end  
 end
