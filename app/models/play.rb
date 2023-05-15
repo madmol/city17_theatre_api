@@ -4,11 +4,11 @@ class Play < ApplicationRecord
   validate :validate_other_plays_overlap, if: -> { errors[:date_range].empty? }
 
   def start_date
-    date_range.first
+    date_range&.first
   end
 
   def end_date
-    date_range.exclude_end? ? date_range.last - 1.day : date_range.last
+    date_range&.exclude_end? ? date_range&.last - 1.day : date_range&.last
   end
 
   def date_range=(value)
