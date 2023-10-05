@@ -11,9 +11,10 @@ The Theatre Application is a web application that allows theatre managers to man
 ## Getting Started
 To run the application, you will need to have Ruby and Rails installed on your system. Application is built on Rails 6.1 and runs on Ruby 2.7.1 nd is only suitable for PostgreSQL databases.
 
-## Copy code
+## Setup
 ```
 bundle install
+rails db:create
 rails db:migrate
 rails server
 ```
